@@ -1,0 +1,258 @@
+# DAY 4 – Docker Networking, Compose, Jenkins & Dockerfile
+
+## 1. Docker Networking
+
+Learned how Docker containers communicate using Docker networks.
+
+```bash
+docker network ls
+docker network create sji-demonet
+docker network ls
+```
+
+Created another network:
+
+```bash
+docker network create test
+docker network ls
+```
+
+Ran a container using a custom network:
+
+```bash
+docker run -d --name demo -p 8081:80 --network sji-demonet customimg
+```
+
+Checked the container:
+
+```bash
+docker ps
+docker inspect demo
+```
+
+---
+
+## 2. Docker Cleanup
+
+Checked containers and images:
+
+```bash
+docker ps -a
+docker images
+```
+
+Removed unused Docker resources:
+
+```bash
+docker system prune
+docker system prune -a
+```
+
+---
+
+## 3. Docker Image
+
+Built a custom image using a Dockerfile:
+
+```bash
+docker build -t customimg:latest .
+```
+
+Checked the image:
+
+```bash
+docker images
+docker images customimg
+```
+
+---
+
+## 4. Docker Compose
+
+Docker Compose is used to manage multiple services using a YAML file.
+
+Checked the Compose version:
+
+```bash
+docker compose version
+```
+
+Checked the Compose file:
+
+```bash
+cat docker-compose.yaml
+```
+
+Started services:
+
+```bash
+docker compose up
+docker compose up -d
+```
+
+Checked services:
+
+```bash
+docker compose ps
+docker compose images
+docker ps
+```
+
+Stopped and removed services:
+
+```bash
+docker compose down
+```
+
+---
+
+## 5. Frontend with Docker Compose
+
+Created a frontend directory and HTML file:
+
+```bash
+mkdir frontend
+cd frontend
+notepad index.html
+ls
+```
+
+Used Docker Compose to run the frontend service.
+
+Checked the frontend container:
+
+```bash
+docker inspect frontend
+```
+
+---
+
+## 6. Java/JDK and Jenkins
+
+Installed Java/JDK as a prerequisite for Jenkins.
+
+After Java/JDK installation, Jenkins was installed successfully.
+
+The Jenkins dashboard configuration was not part of this task.
+
+---
+
+## 7. Dockerfile with Node.js
+
+Created a simple Node.js resource file:
+
+```text
+app.js
+```
+
+Created a Dockerfile without a file extension.
+
+The `Dockerfile` and `app.js` were kept in the same directory.
+
+Workflow:
+
+```text
+app.js
+   ↓
+Dockerfile
+   ↓
+Build Image
+   ↓
+Run Container
+   ↓
+Test Application
+```
+
+Built the image:
+
+```bash
+docker build -t node-app .
+```
+
+Ran the container and tested the application.
+
+---
+
+## 8. Git and GitHub
+
+Checked the changes:
+
+```bash
+git status
+```
+
+Added the Dockerfile and Node.js file:
+
+```bash
+git add Dockerfile app.js
+```
+
+Committed the changes:
+
+```bash
+git commit -m "Add Dockerfile and Node.js resource file"
+```
+
+Pushed the changes:
+
+```bash
+git push
+```
+
+Verified the files in GitHub.
+
+---
+
+## Key Learnings
+
+* Created and managed Docker networks.
+* Connected containers to custom networks.
+* Used Docker cleanup commands.
+* Inspected containers and network configuration.
+* Built and checked Docker images.
+* Learned basic Docker Compose commands.
+* Ran services using Docker Compose.
+* Created a frontend service.
+* Installed Java/JDK and Jenkins.
+* Created a Dockerfile for a Node.js application.
+* Built and tested a Docker image.
+* Added Dockerfile files to Git.
+* Committed and pushed changes to GitHub.
+
+## Day 4 Flow
+
+```text
+Docker Network
+      ↓
+Custom Network
+      ↓
+Run Container
+      ↓
+Inspect Container
+      ↓
+Docker Cleanup
+      ↓
+Docker Compose
+      ↓
+Frontend Service
+      ↓
+Java/JDK
+      ↓
+Jenkins
+      ↓
+Node.js App
+      ↓
+Dockerfile
+      ↓
+Build Image
+      ↓
+Run & Test Container
+      ↓
+Git Add
+      ↓
+Git Commit
+      ↓
+Git Push
+      ↓
+Verify on GitHub
+```
