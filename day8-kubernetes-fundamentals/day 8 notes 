@@ -1,0 +1,34 @@
+1. Kubernetes (K8s) Orchestration & Architecture
+Kubernetes and Docker are not the same; Kubernetes is used for orchestration. If a system can only handle 300 containers but you have 1,000 incoming, K8s simplifies the workload by distributing it across multiple computers in a cluster.  
+Cluster Basics
+
+A cluster is a collection of systems working together (e.g., 5 laptops where 1 is the Master and 4 are Worker nodes). AWS provides managed K8s via EKS.   Master Node Components
+These are the core components that manage the cluster. If the master node crashes, the cluster fails.   ETC (etcd): Acts as the "brain" or main storage of the cluster.   Scheduler: Assigns workloads to available/free worker nodes.   Controllers: Includes Replica Set Controller and Job Controller, which assign tasks and continuously check the health of the nodes. 
+
+Worker Node Components
+
+These components run on the worker machines to execute the actual workloads.   
+
+Pod: The smallest deployable unit, containing one or more containers. No matter how many containers are inside a single pod, they all share the same network and IP address.   
+
+Container Runtime: Software like ContainerD (similar to Docker) used for actual containerization.   
+
+Kubelet: The agent that communicates with the master node; all worker node updates happen through the Kubelet.   
+
+Kube-Proxy: Handles networking, port exposing, and port forwarding. It is responsible for routing incoming traffic to the exact, correct pod.   
+
+2. Terraform (Infrastructure as Code)Purpose: Terraform is a third-party Infrastructure as Code (IaC) tool.  
+
+ Multi-Cloud: It works across AWS, Azure, and GCP, which is highly useful because companies often do not rely on a single cloud provider.   
+ 
+ Syntax: The scripting syntax remains consistent across different environments, utilizing .tf files (manifests).   Infrastructure 
+ 
+ Setup: You must prepare network configurations in Terraform, including the VPC, Subnets, Internet Gateway, and Security Groups, before configuring the EC2 instance to use them.   
+ 
+ 3. Jenkins & Docker Compose 
+ 
+ (Day 7)Docker Compose: Used for automation scripting and deploying multi-container applications. These configurations must be written in YAML format.   
+ 
+ Jenkins Plugins: Plugins are important for connecting tools, such as integrating Terraform with Jenkins.  
+ 
+Project Parameterization: Projects can be parameterized to track exactly "what and who did stuff" within the pipeline.   Build Periodically: You can schedule jobs using cron syntax. For example, 15 * * * * or * * * * * will automatically run and refresh the build every 15 minutes or every 1 minute, respectively.  

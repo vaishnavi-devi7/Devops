@@ -1,0 +1,59 @@
+1. What is a Deployment Rollout?
+
+A rollout in Kubernetes manages the lifecycle of your application updates. When you update a Deployment (e.g., changing container image versions, environment variables, or resource limits), Kubernetes performs a rolling update. This ensures zero downtime by gradually terminating old pods and spinning up new pods with the updated version.
+
+2. Checking Rollout Status (kubectl rollout status)
+
+Whenever you trigger an update or scale a deployment, you can monitor its progress in real-time using:
+
+Bash
+
+kubectl rollout status deployment/<deployment-name>
+Purpose: It blocks and waits until the rollout operation completes successfully (all new pods are up and running, and old pods are safely terminated).
+
+Common Output: deployment "nginxdeploy" successfully rolled out
+
+3. Viewing Rollout History (kubectl rollout history)
+
+Kubernetes keeps track of revision history so you can see past changes or roll back if something goes wrong.
+
+View all revisions:
+
+Bash
+kubectl rollout history deployment/<deployment-name>
+View details of a specific revision:
+
+Bash
+kubectl rollout history deployment/<deployment-name> --revision=2
+
+4. Rolling Back an Update (kubectl rollout undo)
+
+If a new update introduces a bug or causes crashes, you can instantly revert your deployment to the previous version or a specific revision.
+
+Undo to the immediate previous version:
+
+Bash
+kubectl rollout undo deployment/<deployment-name>
+Roll back to a specific revision:
+
+Bash
+kubectl rollout undo deployment/<deployment-name> --to-revision=1
+
+5. Managing Rollouts (Pause & Resume)
+
+Sometimes you want to make multiple changes to a deployment configuration (like changing images and environment variables simultaneously) without triggering a rollout for every single change.
+
+Pause a rollout:
+
+Bash
+kubectl rollout pause deployment/<deployment-name>
+Resume a rollout:
+
+Bash
+kubectl rollout resume deployment/<deployment-name>
+
+6. Key Best Practices for Production
+
+Set revisionHistoryLimit: By default, Kubernetes stores 10 revisions. You can configure this in your deployment spec to save cluster storage.
+
+Use Probes (livenessProbe and readinessProbe): Ensure Kubernetes knows when a new pod is truly ready to accept traffic before cutting off the old pods.

@@ -1,0 +1,17 @@
+.DS_Store
+# Local .terraform directory
+.terraform/
+.terraform.lock.hcl
+
+# Local state files (contains credentials & infrastructure state)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Sensitive variables
+*.tfvars
+*.tfvars.json
+
+# Crash logs
+crash.log
+crash.*.log

@@ -1,0 +1,41 @@
+Day 5: Registry + Continuous Delivery (CD)
+
+1. Key Concepts
+Container Registry: A centralized repository used to store, manage, and distribute Docker container images (e.g., Docker Hub, Amazon ECR, GitHub Container Registry).
+
+Continuous Delivery (CD): An automated software development practice where code changes are automatically built, tested, and prepared for release to a registry or production environment.
+
+Image Tagging: The practice of versioning container images (repository:tag, such as vaishnavi-devi7/task123:latest or :v1.0) to ensure consistent deployments.
+
+2. Manual Registry Workflow (CLI)
+Bash
+# 1. Authenticate with Docker Hub
+docker login
+
+# 2. Tag local image for your registry repository
+docker tag customimg <YOUR_DOCKERHUB_USERNAME>/task123:latest
+
+# 3. Push image to Docker Hub
+docker push <YOUR_DOCKERHUB_USERNAME>/task123:latest
+3. Automated CD Pipeline with GitHub Actions
+Secrets Setup
+To allow GitHub Actions to push images securely without hardcoding credentials in source control:
+
+DOCKERHUB_USERNAME: Your Docker Hub account username.
+
+DOCKERHUB_TOKEN: Personal Access Token generated in Docker Hub settings (Account Settings → Security → New Access Token).
+
+Workflow Structure (.github/workflows/deploy.yml)
+Trigger: Listens for push events on the main branch.
+
+Runner: Executes on an ubuntu-latest virtual environment.
+
+Steps:
+
+Checkout: Pulls repository source code (actions/checkout).
+
+Login: Authenticates with Docker Hub (docker/login-action).
+
+Buildx: Sets up extended Docker build capabilities (docker/setup-buildx-action).
+
+Build & Push: Compiles the Dockerfile and pushes the tagged image directly to Docker Hub (docker/build-push-action).
